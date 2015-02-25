@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
+    var userHasPressedFirstPoint = false
+    let pi = M_PI
    
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -25,6 +27,14 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func enterPoint(sender: UIButton) {
+        if !userHasPressedFirstPoint {
+            appendDigit(sender)
+            userHasPressedFirstPoint = true
+        }
+
+    }
+    
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
@@ -36,6 +46,9 @@ class ViewController: UIViewController {
         case "+": performOperation {$1 + $0}
         case "-": performOperation {$1 - $0}
         case "√": performOperation {sqrt($0)}
+        case "sin": performOperation {sin($0)}
+        case "cos": performOperation {cos($0)}
+        case "π": performOperation()
         default: break
         }
     }
@@ -54,9 +67,16 @@ class ViewController: UIViewController {
         }
     }
     
+    func performOperation() {
+        displayValue = pi
+        println(pi)
+        enter()
+    }
+    
     var operandStack = Array<Double>()
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
+        userHasPressedFirstPoint = false
         operandStack.append(displayValue)
         println("\(operandStack)")
     }
