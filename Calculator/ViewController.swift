@@ -18,16 +18,12 @@ class ViewController: UIViewController {
     var userHasPressedFirstPoint = false
     let pi = M_PI
    
-//    @IBAction func writeHistory(sender: UIButton) {
-//        if userIsInTheMiddleOfTypingANumber {
-//            history.text = history.text! + sender.currentTitle!
-//        }
-//        else {
-//            history.text = history.text! + " " + sender.currentTitle!
-//        }
-//    }
-  
     @IBAction func clear(sender: UIButton) {
+        userIsInTheMiddleOfTypingANumber = false
+        history.text = ""
+        display.text = "0"
+        operandStack.removeAll(keepCapacity: false)
+        
     }
     
     @IBAction func appendDigit(sender: UIButton) {
