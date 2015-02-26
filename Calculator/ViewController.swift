@@ -10,19 +10,35 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var history: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
     var userHasPressedFirstPoint = false
     let pi = M_PI
    
+//    @IBAction func writeHistory(sender: UIButton) {
+//        if userIsInTheMiddleOfTypingANumber {
+//            history.text = history.text! + sender.currentTitle!
+//        }
+//        else {
+//            history.text = history.text! + " " + sender.currentTitle!
+//        }
+//    }
+  
+    @IBAction func clear(sender: UIButton) {
+    }
+    
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
              display.text = display.text! + digit
+             history.text =  history.text! +  sender.currentTitle!
         }
         else {
             display.text = digit
+            history.text =  history.text! + " " + sender.currentTitle!
             userIsInTheMiddleOfTypingANumber = true
         }
     }
@@ -32,11 +48,11 @@ class ViewController: UIViewController {
             appendDigit(sender)
             userHasPressedFirstPoint = true
         }
-
     }
     
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!
+        history.text =  history.text! + " " + sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
             enter()
         }
